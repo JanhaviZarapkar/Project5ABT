@@ -106,7 +106,7 @@ const LoanAccount = (props) => {
           size="large"
           style={{ width: "50%" }}
           onClick={() => {
-            props.history.push("/LoanSchedule" + 100);
+            props.history.push("/LoanSchedule/" + 100);
           }}
         >
           Loan Schedule

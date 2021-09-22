@@ -1,4 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { withRouter } from "react-router";
+import React from "react";
 import grey from "@mui/material/colors";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,6 +8,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 const Headers = (props) => {
+  function signOut() {
+    props.history.push("/Signin");
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -18,7 +23,7 @@ const Headers = (props) => {
           >
             Home Loan
           </Typography>
-          <Button variant="contained" color="success">
+          <Button variant="contained" color="success" onClick={signOut}>
             Sign Out
           </Button>
         </Toolbar>
@@ -26,4 +31,4 @@ const Headers = (props) => {
     </Box>
   );
 };
-export default Headers;
+export default withRouter(Headers);
