@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 const LoanAccount = (props) => {
   const [prepay, setprepay] = useState(true);
@@ -14,6 +15,12 @@ const LoanAccount = (props) => {
   const [tenure, settenure] = useState("00000");
   const [status, setstatus] = useState("00000");
   const [loanAccNo, setloanAccNo] = useState("00000");
+  useEffect(() => {
+    axios.get("http://localhost:4000/auth/login").then((res) => {
+      var response = res.data;
+      console.log(response);
+    });
+  });
   return (
     <div>
       <Header />

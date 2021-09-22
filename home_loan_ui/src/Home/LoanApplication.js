@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
@@ -10,6 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Header from "./Header";
+import axios from "axios";
 const LoanApplication = (props) => {
   const [loanamt, setloanamt] = useState(1000.0);
   const [loantime, setloantime] = useState(3);
@@ -56,6 +57,12 @@ const LoanApplication = (props) => {
       props.history.push("/loanAccount/" + loanaccId);
     }
   };
+  useEffect(() => {
+    axios.get("http://localhost:4000/auth/login").then((res) => {
+      var response = res.data;
+      console.log(response);
+    });
+  });
   return (
     <div>
       <Header />
