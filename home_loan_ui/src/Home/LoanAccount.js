@@ -15,8 +15,9 @@ const LoanAccount = (props) => {
   const [tenure, settenure] = useState("00000");
   const [status, setstatus] = useState("00000");
   const [loanAccNo, setloanAccNo] = useState("00000");
+  var loanaccid = props.match.params.id;
   useEffect(() => {
-    axios.get("http://localhost:4000/auth/login").then((res) => {
+    axios.get("http://localhost:4000/auth/login/" + loanaccid).then((res) => {
       var response = res.data;
       console.log(response);
     });
@@ -87,7 +88,7 @@ const LoanAccount = (props) => {
                     variant="contained"
                     color="success"
                     onClick={() => {
-                      props.history.push("/Prepayment/" + loanAccNo);
+                      props.history.push("/Prepayment/" + loanaccid);
                     }}
                   >
                     Pay
@@ -106,7 +107,7 @@ const LoanAccount = (props) => {
           size="large"
           style={{ width: "50%" }}
           onClick={() => {
-            props.history.push("/LoanSchedule/" + 100);
+            props.history.push("/LoanSchedule/" + loanaccid);
           }}
         >
           Loan Schedule

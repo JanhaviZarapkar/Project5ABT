@@ -48,21 +48,30 @@ const LoanApplication = (props) => {
     settotPay(emi.toFixed(2) * 12);
   };
   const calculate = () => {
-    var loanaccId = 100;
     console.log(loanamt);
     if (loanamt > 5000) {
       alert("Alert" + loanamt);
       props.history.push("/LoanApplication");
     } else {
-      props.history.push("/loanAccount/" + loanaccId);
+      var loanaccid = 1;
+      //var savid = JSON.parse(localStorage.getItem("user")).userid;
+      var savid = 1001;
+      axios
+        .post("http://localhost:4000/auth/login", {
+          savAccId: savid,
+          loanamt: loanamt,
+          loantime: loantime,
+          loanrate: loanrate,
+        })
+        .then((res) => {
+          var response = res.data;
+          console.log(response);
+          //loanaaid=res.data
+        });
+      props.history.push("/loanAccount/" + loanaccid);
     }
   };
-  useEffect(() => {
-    axios.get("http://localhost:4000/auth/login").then((res) => {
-      var response = res.data;
-      console.log(response);
-    });
-  });
+  useEffect(() => {});
   return (
     <div>
       <Header />
