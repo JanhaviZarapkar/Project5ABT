@@ -1,4 +1,4 @@
-package com.example.homeloan;
+package com.example2.webapp3;
 
 public class LoanParams {
 	
