@@ -7,7 +7,7 @@ import Header from "./Header";
 import Button from "@mui/material/Button";
 
 const LoanAccount = (props) => {
-  const [prepay, setprepay] = useState(false);
+  const [prepay, setprepay] = useState(true);
   const [SavAccNo, setSavAccno] = useState("00000");
   const [amount, setamount] = useState("00000");
   const [rate, setrate] = useState("00000");
@@ -99,7 +99,7 @@ const LoanAccount = (props) => {
           size="large"
           style={{ width: "50%" }}
           onClick={() => {
-            props.history.push("/LoanSchedule");
+            props.history.push("/LoanSchedule" + 100);
           }}
         >
           Loan Schedule

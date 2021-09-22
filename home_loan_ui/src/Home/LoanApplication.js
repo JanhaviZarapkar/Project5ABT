@@ -24,7 +24,7 @@ const LoanApplication = (props) => {
         Math.pow(1 + loanrate / 1200, loantime)) /
       Math.pow(1 + loanrate / 1200, loantime - 1);
     setmonthPay(emi.toFixed(2));
-    setloanamt(emi.toFixed(2) * 12);
+    settotPay(emi.toFixed(2) * 12);
   };
   const timeChange = (e) => {
     setloantime(e.target.value);
@@ -34,7 +34,7 @@ const LoanApplication = (props) => {
         Math.pow(1 + loanrate / 1200, loantime)) /
       Math.pow(1 + loanrate / 1200, loantime - 1);
     setmonthPay(emi.toFixed(2));
-    setloanamt(emi.toFixed(2) * 12);
+    settotPay(emi.toFixed(2) * 12);
   };
   const rateChange = (e) => {
     setloanrate(e.target.value);
@@ -44,11 +44,11 @@ const LoanApplication = (props) => {
         Math.pow(1 + loanrate / 1200, loantime)) /
       Math.pow(1 + loanrate / 1200, loantime - 1);
     setmonthPay(emi.toFixed(2));
-    setloanamt(emi.toFixed(2) * 12);
+    settotPay(emi.toFixed(2) * 12);
   };
   const calculate = () => {
     var loanaccId = 100;
-    alert("Loan amount is high");
+    console.log(loanamt);
     if (loanamt > 5000) {
       alert("Alert" + loanamt);
       props.history.push("/LoanApplication");
@@ -172,9 +172,7 @@ const LoanApplication = (props) => {
                 variant="contained"
                 size="large"
                 style={{ width: "50%" }}
-                onClick={() => {
-                  calculate();
-                }}
+                onClick={calculate}
               >
                 Apply
               </Button>
