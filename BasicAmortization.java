@@ -1,7 +1,7 @@
 import java.util.*;
 import java.text.DecimalFormat;
 
-public class Amortization {
+public class BasicAmortization {
 	
 	public static double calcEMI(double a, int m, double r) {
 		double term = Math.pow((1+r), m);
