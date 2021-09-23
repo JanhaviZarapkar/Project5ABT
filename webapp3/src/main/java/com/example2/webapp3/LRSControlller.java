@@ -3,6 +3,8 @@ package com.example2.webapp3;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.DecimalFormat;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 @RestController
 public class LRSControlller {
@@ -33,9 +33,9 @@ public class LRSControlller {
 		
 		//first month
 		LoanRepaymentSchedule obj = new LoanRepaymentSchedule();
-		//obj.setpaymentid(1);
 		obj.setLoanid(loanid);
-		obj.setDate("1");
+		YearMonth k = YearMonth.now().plusMonths(1);
+		obj.setDate(k.format(DateTimeFormatter.ofPattern("MMM yyyy")));
 		obj.setEmi(emi);
 		obj.setInterest(Double.parseDouble(df.format(amount * mRate)));
 		obj.setPrincipal(Double.parseDouble(df.format(emi - obj.getInterest())));
@@ -47,9 +47,9 @@ public class LRSControlller {
 		//after the first month
 		for(int i=1; i<month; i++) {
 			LoanRepaymentSchedule obj1 = new LoanRepaymentSchedule();
-			//obj1.setpaymentid(i+1);
+			YearMonth k1 = YearMonth.now().plusMonths(i+1);
 			obj1.setLoanid(loanid);
-			obj1.setDate(Integer.toString(i+1));
+			obj1.setDate(k1.format(DateTimeFormatter.ofPattern("MMM yyyy")));
 			obj1.setEmi(emi);
 			obj1.setInterest(Double.parseDouble(df.format(prevOut * mRate)));
 			obj1.setPrincipal(Double.parseDouble(df.format(emi - obj1.getInterest())));
