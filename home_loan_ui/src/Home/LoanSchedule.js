@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import Container from "@mui/material/Container";
@@ -15,41 +15,50 @@ import Button from "@mui/material/Button";
 function createData(date, emi, principal, interest, oustanding, status) {
   return { date, emi, principal, interest, oustanding, status };
 }
-const payment = (id) => {
-  axios.put().then((res) => {
-    var response = res.data;
-    var temp = rows.filter((data) => {
-      data.id != id;
-    });
-    setData(temp);
-  });
-};
-const [datas, setData] = useState();
-const rows = [
-  createData("Sep 2021", 10000, 7500, 2500, 42500, "Pending"),
-  createData("Oct 2021", 10000, 8000, 2000, 34500, "Pending"),
-];
-const headers = [
-  { label: "Date", key: "firstName" },
-  { label: "EMI", key: "lastName" },
-  { label: "Principal", key: "email" },
-  { label: "Interest", key: "age" },
-  { label: "outstanding", key: "age" },
-  { label: "status", key: "age" },
-];
-
-const csvReport = {
-  data: datas,
-  headers: headers,
-  filename: "report",
-};
-const LoanSchedule = () => {
+const LoanSchedule = (props) => {
+ 
+  
+  const payment = (id) => {
+    // axios.put().then((res) => {
+    //   var response = res.data;
+    //   var temp = rows.filter((data) => {
+    //     data.id != id;
+    //   });
+    //   setData(temp);
+    // });
+    console.log(id);
+  };
+  const [datas, setData] = useState();
+  // useEffect(()=>{
+  //   // axios.get().then((res)=>{
+  //   //   var response = res.data;
+  //   //   setData(response);
+  //   // });
+  // })
+  const rows = [
+    createData("Sep 2021", 10000, 7500, 2500, 42500, "Pending"),
+    createData("Oct 2021", 10000, 8000, 2000, 34500, "Pending"),
+  ];
+  const headers = [
+    { label: "Date", key: "firstName" },
+    { label: "EMI", key: "lastName" },
+    { label: "Principal", key: "email" },
+    { label: "Interest", key: "age" },
+    { label: "outstanding", key: "age" },
+    { label: "status", key: "age" },
+  ];
+  
+  // const csvReport = {
+  //   data: datas,
+  //   headers: headers,
+  //   filename: "report",
+  // };
   return (
     <div>
       <Header />
       <Container style={{ marginTop: "5%" }}>
         <h1>Loan Schedule</h1>
-        <csvlink {...csvreport}>Download</csvlink>
+        {/* <CSVLink {...csvReport}>Download</CSVLink> */}
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>

@@ -12,9 +12,11 @@ import Button from "@mui/material/Button";
 import Header from "./Header";
 import axios from "axios";
 const LoanApplication = (props) => {
+  var cusid=localStorage.getItem("customerid");
+  var savid=localStorage.getItem("saving_account_id");
   const [loanamt, setloanamt] = useState(1000.0);
   const [loantime, setloantime] = useState(3);
-  const [loanrate, setloanrate] = useState(7.5);
+  const [loanrate, setloanrate] = useState(7);
   const [monthPay, setmonthPay] = useState(100);
   const [totPay, settotPay] = useState(1000);
   const amtChange = (e) => {
@@ -48,9 +50,10 @@ const LoanApplication = (props) => {
     settotPay(emi.toFixed(2) * 12);
   };
   const calculate = () => {
+    
     //var savid = JSON.parse(localStorage.getItem("user")).userid;
     //var cusid = JSON.parse(localStorage.getItem("user")).userid;
-    var cusid=10;
+    //var cusid=10;
     var salary=5000;
     axios.get("http://localhost:8080/saving/" + savid).then((res) => {
       var response = res.data;
@@ -64,7 +67,7 @@ const LoanApplication = (props) => {
       props.history.push("/LoanApplication");
     } else {
     //  var loanaccid = 1;
-      var savid = 1001;
+      //var savid = 1001;
       axios
         .post("http://localhost:8080/add", {
           total_loan_amount:loanamt,
@@ -126,7 +129,7 @@ const LoanApplication = (props) => {
                       <Input
                         id="standard-adornment-amount"
                         startAdornment={
-                          <InputAdornment position="start">$</InputAdornment>
+                          <InputAdornment position="start">₹</InputAdornment>
                         }
                         defaultValue={loanamt}
                         onChange={(e) => {
@@ -186,13 +189,13 @@ const LoanApplication = (props) => {
                         fontWeight: "bold",
                       }}
                     >
-                      Monthly Pay: ${monthPay}
+                      Monthly Pay: ₹ {monthPay}
                     </Box>
                   </Grid>
 
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     Total of 12 Loan Payments ${totPay}
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
             </Grid>

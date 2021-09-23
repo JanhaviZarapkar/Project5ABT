@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Route path="/SignIn" component={SignIn} />
+        <Route path="/" exact={true} component={SignIn} />
         <Route path="/signout" component={SignOut} />
         <Route path="/home" component={Home} />
         <Route path="/LoanApplication" component={LoanApplication} />

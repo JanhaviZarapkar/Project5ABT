@@ -17,8 +17,9 @@ const Home = (props) => {
   const [CurrentBalance, setCurrentBalance] = useState(100.0);
   const [Salary, setSalary] = useState(1000.0);
   useEffect(() => {
-    //var savid = JSON.parse(localStorage.getItem("user")).userid;
-    var savid = 1;
+    // var custid=localStorage.getItem("customerid");
+    var savid=localStorage.getItem("saving_account_id");
+    
     axios.get("http://localhost:8080/saving/" + savid).then((res) => {
       var response = res.data;
       console.log(response);
