@@ -5,6 +5,7 @@ import java.util.List;
 import java.text.DecimalFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ public class LRSControlller {
 	
 	@PutMapping("/addloanschedule")
 	public List<LoanRepaymentSchedule> addSchedule(@RequestBody LoanParams lp) {
+		int loanid = lp.getLoanid();
 		double amount = lp.getAmount();
 		int month = lp.getMonth();
 		double rate = lp.getRate();
@@ -32,7 +34,8 @@ public class LRSControlller {
 		
 		//first month
 		LoanRepaymentSchedule obj = new LoanRepaymentSchedule();
-		obj.setpaymentid(1);
+		//obj.setpaymentid(1);
+		obj.setLoanid(loanid);
 		obj.setDate("1");
 		obj.setEmi(emi);
 		obj.setInterest(Double.parseDouble(df.format(amount * mRate)));
@@ -45,7 +48,8 @@ public class LRSControlller {
 		//after the first month
 		for(int i=1; i<month; i++) {
 			LoanRepaymentSchedule obj1 = new LoanRepaymentSchedule();
-			obj1.setpaymentid(i+1);
+			//obj1.setpaymentid(i+1);
+			obj1.setLoanid(loanid);
 			obj1.setDate(Integer.toString(i+1));
 			obj1.setEmi(emi);
 			obj1.setInterest(Double.parseDouble(df.format(prevOut * mRate)));
@@ -59,6 +63,10 @@ public class LRSControlller {
 		return repo.saveAll(plist);
 	}
 	
+	/*
+	@Query("select p from loanrepaymentschedule p where p.loanid is '%@gmail.com'")
+	List<LoanRepaymentSchedule> findByLoanId(@Param("date") LocalDate date);
+	*/
 	@GetMapping("/getloanschedule")
 	public List <LoanRepaymentSchedule> getSchedule() {
 		return repo.findAll();

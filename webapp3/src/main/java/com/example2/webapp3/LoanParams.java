@@ -2,10 +2,17 @@ package com.example2.webapp3;
 
 public class LoanParams {
 	
+	int loanid;
 	double amount;
 	int month;
 	double rate;
 	
+	public int getLoanid() {
+		return loanid;
+	}
+	public void setLoanid(int loanid) {
+		this.loanid = loanid;
+	}
 	public double getAmount() {
 		return amount;
 	}

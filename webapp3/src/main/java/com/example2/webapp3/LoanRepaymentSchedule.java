@@ -2,6 +2,7 @@ package com.example2.webapp3;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,9 +10,12 @@ import javax.persistence.Table;
 @Table(name = "loanrepaymentschedule")
 public class LoanRepaymentSchedule {
 	@Id
+	@GeneratedValue
 	//@Column(name="paymentid")
 	private int paymentid;
 	
+	private int loanid;
+
 	//@Column(name="Date")
 	private String date;
 	
@@ -36,6 +40,15 @@ public class LoanRepaymentSchedule {
 
 	public void setpaymentid(int paymentid) {
 		this.paymentid = paymentid;
+	}
+	
+
+	public int getLoanid() {
+		return loanid;
+	}
+
+	public void setLoanid(int loanid) {
+		this.loanid = loanid;
 	}
 
 	public String getDate() {
@@ -88,9 +101,9 @@ public class LoanRepaymentSchedule {
 
 	@Override
 	public String toString() {
-		return "LoanRepaymentSchedule [paymentid=" + paymentid + ", date=" + date + ", emi=" + emi
-				+ ", principal=" + principal + ", interest=" + interest + ", outstanding=" + outstanding + ", paid="
-				+ paid + "]";
+		return "LoanRepaymentSchedule [paymentid=" + paymentid + ", loanid=" + loanid + ", date=" + date + ", emi="
+				+ emi + ", principal=" + principal + ", interest=" + interest + ", outstanding=" + outstanding
+				+ ", paid=" + paid + "]";
 	}
-
+	
 }
