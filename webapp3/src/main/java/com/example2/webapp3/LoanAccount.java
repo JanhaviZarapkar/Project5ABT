@@ -22,6 +22,7 @@ public class LoanAccount {
     private boolean loan_prepayment_eligibility;
     private int customer_id;
     private int saving_account_id;
+    private String email;
     
     public int getLoan_account_id() {
         return loan_account_id;
@@ -56,6 +57,9 @@ public class LoanAccount {
     public String getStatus() {
         return status;
     }
+    public String getEmail() {
+        return email;
+    }
     public void setStatus(String status) {
         this.status = status;
     }
@@ -76,6 +80,10 @@ public class LoanAccount {
     }
     public void setSaving_account_id(int saving_account_id) {
         this.saving_account_id = saving_account_id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     
