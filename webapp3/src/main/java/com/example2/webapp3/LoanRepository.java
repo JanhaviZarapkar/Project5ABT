@@ -1,7 +1,12 @@
 package com.example2.webapp3;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface LoanRepository extends JpaRepository<LoanAccount,Integer>{
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface LRSRepository extends JpaRepository<LoanRepaymentSchedule, Integer> {
+	@Query(value="select * from loanrepaymentschedule l where l.loanid= ?1",nativeQuery= true)
+	List<LoanRepaymentSchedule> findByLoanId(int loanid);
 }
+

@@ -63,12 +63,8 @@ public class LRSControlller {
 		return repo.saveAll(plist);
 	}
 	
-	/*
-	@Query("select p from loanrepaymentschedule p where p.loanid is '%@gmail.com'")
-	List<LoanRepaymentSchedule> findByLoanId(@Param("date") LocalDate date);
-	*/
-	@GetMapping("/getloanschedule")
-	public List <LoanRepaymentSchedule> getSchedule() {
-		return repo.findAll();
+	@GetMapping("/getloanschedule/loanid")
+	public List <LoanRepaymentSchedule> getSchedule(@RequestParam int loanid) {
+		return repo.findByLoanId(loanid);
 	}
 }
