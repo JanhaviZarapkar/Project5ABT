@@ -17,6 +17,7 @@ public class LoanAccount {
     private int total_loan_amount;
     private float rate;
     private int tenure;
+    private String imgurl;
     private String status;
     private boolean loan_prepayment_eligibility;
     private int customer_id;
@@ -46,6 +47,12 @@ public class LoanAccount {
     public void setTenure(int tenure) {
         this.tenure = tenure;
     }
+    public String getImgurl() {
+		return imgurl;
+	}
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
     public String getStatus() {
         return status;
     }
