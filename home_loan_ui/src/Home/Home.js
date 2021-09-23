@@ -18,10 +18,16 @@ const Home = (props) => {
   const [Salary, setSalary] = useState(1000.0);
   useEffect(() => {
     //var savid = JSON.parse(localStorage.getItem("user")).userid;
-    var savid = 1001;
-    axios.get("http://localhost:4000/saving/" + savid).then((res) => {
+    var savid = 1;
+    axios.get("http://localhost:8080/saving/" + savid).then((res) => {
       var response = res.data;
       console.log(response);
+      setAccno(response.savings_account_id);
+      setName(response.name);
+      setEmail(response.email); 
+      setAddress(response.address);
+      setCurrentBalance(response.currentbalance);
+      setSalary(response.salary);
     });
   });
   return (

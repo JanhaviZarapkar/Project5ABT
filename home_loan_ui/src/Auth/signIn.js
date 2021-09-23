@@ -11,21 +11,24 @@ const SignIn = (props) => {
   function submitFunction() {
     console.log(username + ":" + password);
     axios
-      .post("http://localhost:4000/auth/login", {
-        username: username,
-        password: password,
-      })
+      .get("http://localhost:8080/home?username=" + username + "&password=" + password)
       .then((res) => {
         var response = res.data;
         console.log(response);
-        if (response.login) {
-          localStorage.setItem("user", JSON.stringify(response));
+        if (response.length>2) {
+          localStorage.setItem("customerid",response.split(" ")[0]);
+          localStorage.setItem("saving_account_id",response.split(" ")[1]);
+          console.log(localStorage.getItem("customerid"));
+          console.log(localStorage.getItem("saving_account_id"));
+
           props.history.push("/home");
         } else {
           props.history.push("/SignIn");
         }
       });
-    props.history.push("/home");
+
+     
+     // props.history.push("/SignIn");
   }
   return (
     <div>

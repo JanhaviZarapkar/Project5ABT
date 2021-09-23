@@ -7,15 +7,30 @@ import axios from "axios";
 
 const Prepayment = (props) => {
   const [amount, setAmount] = useState(100.0);
+  var loanaccid = props.match.params.id;
   function compute() {
-    props.history.push("/Home");
-  }
-  useEffect(() => {
-    axios.get("http://localhost:4000/auth/login").then((res) => {
+    axios.post("http://localhost:8080/delete/" + 2).then((res) => {
       var response = res.data;
       console.log(response);
+      if(response){
+        alert("Your loan is clear");
+        props.history.push("/Home");
+      }
+    
+
+    });
+   
+  }
+  var loanaccid = props.match.params.id;
+  useEffect(() => {
+    axios.get("http://localhost:8080/loan/" + loanaccid).then((res) => {
+      var response = res.data;
+     // console.log(response) needed outstanding amount;
+    setAmount(1000);
+
     });
   });
+
   return (
     <div>
       <Header />

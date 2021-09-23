@@ -48,27 +48,40 @@ const LoanApplication = (props) => {
     settotPay(emi.toFixed(2) * 12);
   };
   const calculate = () => {
+    //var savid = JSON.parse(localStorage.getItem("user")).userid;
+    //var cusid = JSON.parse(localStorage.getItem("user")).userid;
+    var cusid=10;
+    var salary=5000;
+    axios.get("http://localhost:8080/saving/" + savid).then((res) => {
+      var response = res.data;
+      salary = response.salary;
+    });
+
     console.log(loanamt);
-    if (loanamt > 5000) {
-      alert("Alert" + loanamt);
+    if (loanamt > salary) {
+      var x = salary*50;
+      alert("Maximum loan amount  : " + x);
       props.history.push("/LoanApplication");
     } else {
-      var loanaccid = 1;
-      //var savid = JSON.parse(localStorage.getItem("user")).userid;
+    //  var loanaccid = 1;
       var savid = 1001;
       axios
-        .post("http://localhost:4000/auth/login", {
-          savAccId: savid,
-          loanamt: loanamt,
-          loantime: loantime,
-          loanrate: loanrate,
+        .post("http://localhost:8080/add", {
+          total_loan_amount:loanamt,
+          rate:loanrate,
+          tenure:loantime,
+          status: "Ongoining",
+         /* loan_prepayment_eligibility:false, */
+          customer_id:cusid,
+          saving_account_id:savid
         })
         .then((res) => {
           var response = res.data;
           console.log(response);
-          //loanaaid=res.data
+          var loanaccid=response;
+          props.history.push("/loanAccount/" + loanaccid);
         });
-      props.history.push("/loanAccount/" + loanaccid);
+    
     }
   };
   useEffect(() => {});
@@ -134,7 +147,7 @@ const LoanApplication = (props) => {
                         id="standard-adornment-amount"
                         startAdornment={
                           <InputAdornment position="start">
-                            Years
+                            Months
                           </InputAdornment>
                         }
                         value={loantime}

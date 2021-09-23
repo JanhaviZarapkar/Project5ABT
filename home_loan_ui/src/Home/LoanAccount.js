@@ -8,18 +8,27 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 
 const LoanAccount = (props) => {
-  const [prepay, setprepay] = useState(true);
+  const [prepay, setPrepay] = useState(true);
   const [SavAccNo, setSavAccno] = useState("00000");
-  const [amount, setamount] = useState("00000");
-  const [rate, setrate] = useState("00000");
-  const [tenure, settenure] = useState("00000");
-  const [status, setstatus] = useState("00000");
-  const [loanAccNo, setloanAccNo] = useState("00000");
+  const [amount, setAmount] = useState("00000");
+  const [rate, setRate] = useState("00000");
+  const [tenure, setTenure] = useState("00000");
+  const [status, setStatus] = useState("00000");
+  const [loanAccNo, setLoanAccNo] = useState("00000");
   var loanaccid = props.match.params.id;
   useEffect(() => {
-    axios.get("http://localhost:4000/auth/login/" + loanaccid).then((res) => {
+    axios.get("http://localhost:8080/loan/" + loanaccid).then((res) => {
       var response = res.data;
-      console.log(response);
+     // console.log(response);
+  //   setPrepay(response.loan_prepayment_eligibility);
+     setSavAccno(response.saving_account_id);
+     setAmount(response.total_loan_amount);
+     setRate(response.rate);
+     setStatus(response.state);
+     setTenure(response.tenure);
+     setStatus(response.status);
+     setLoanAccNo(response.loan_account_id);
+
     });
   });
   return (
