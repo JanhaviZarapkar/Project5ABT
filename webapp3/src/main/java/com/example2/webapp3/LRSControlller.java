@@ -5,11 +5,10 @@ import java.util.List;
 import java.text.DecimalFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -66,5 +65,29 @@ public class LRSControlller {
 	@GetMapping("/getloanschedule/loanid")
 	public List <LoanRepaymentSchedule> getSchedule(@RequestParam int loanid) {
 		return repo.findByLoanId(loanid);
+	}
+	
+	@PutMapping("updateloanschedule/loanid")
+	public LoanRepaymentSchedule updateLoanSchedule(@RequestParam int loanid) {
+		List <LoanRepaymentSchedule> temp = repo.findByLoanId(loanid);
+		int res = 0;
+		for(int i=0; i<temp.size(); i++) {
+			if(temp.get(0).getPaid().equals("Pending")) {
+				res = temp.get(0).getpaymentid();
+				repo.updateByPaymentId("Paid", res);
+				return temp.get(0);
+			}
+			else {
+				if(temp.get(i).getPaid().equals("Paid")) {
+					continue;
+				}
+				else {
+					res = temp.get(i).getpaymentid();
+					repo.updateByPaymentId("Paid", res);
+					return temp.get(i);
+				}
+			}
+		}
+		return null;
 	}
 }
